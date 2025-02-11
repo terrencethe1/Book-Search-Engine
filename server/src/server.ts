@@ -14,3 +14,6 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const app = express() as any; // Explicitly set the application type to resolve type conflicts
+const PORT = process.env.PORT || 3001;
