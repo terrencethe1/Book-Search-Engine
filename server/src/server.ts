@@ -34,17 +34,4 @@ const startApolloServer = async () => {
     context: authMiddleware as any
   }));
 
-  app.use(express.static(path.join(__dirname, '../../client/dist')));
   
-  app.get('*', (_req: Request, res: Response) => {
-    res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
-  });
-
-  app.listen(PORT, () => {
-    console.log(`🌍 Now listening on http://localhost:${PORT}`);
-    console.log(`🚀 GraphQL server ready at http://localhost:${PORT}/graphql`);
-  });
-
-
-
-
