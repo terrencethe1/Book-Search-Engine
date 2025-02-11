@@ -16,4 +16,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express() as any; // Explicitly set the application type to resolve type conflicts
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001;\
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+
