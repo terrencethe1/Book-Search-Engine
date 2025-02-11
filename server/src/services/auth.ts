@@ -35,3 +35,8 @@ export const signToken = (username: string, email: string, _id: unknown) => {
 
   return jwt.sign(payload, secretKey, { expiresIn: '1h' });
 };
+
+export const signToken = (username: string, email: string, _id: unknown) => {
+  const payload = { username, email, _id };
+  return jwt.sign(payload, secretKey, { expiresIn: '1h' });
+};
