@@ -4,6 +4,8 @@ import { GraphQLError } from 'graphql';
 
 dotenv.config();
 
+const secretKey = process.env.JWT_SECRET_KEY || 'test';
+
 interface JwtPayload {
   _id: unknown;
   username: string;
