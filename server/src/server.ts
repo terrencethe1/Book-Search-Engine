@@ -1,6 +1,8 @@
 import express from 'express';
 import type { Request, Response } from 'express';
+
 import path from 'node:path';
+// import { ApolloServer } from 'apollo-server-express';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 
@@ -9,8 +11,6 @@ import db from './config/connection.js';
 import { authMiddleware } from './services/auth.js';
 
 import { fileURLToPath } from 'url';
-
-
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,13 +25,33 @@ const startApolloServer = async () => {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-
+    // context: authMiddleware,
   });
 
   await server.start();
   await db();
+  // server.applyMiddleware({ app });
   app.use('/graphql', expressMiddleware(server, {
     context: authMiddleware as any
   }));
 
+  // Serve static assets if in production
+  // if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../../client/dist')));
   
+    app.get('*', (_req: Request, res: Response) => {
+      res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+    });
+  // }
+
+  // db.once('open', () => {
+    app.listen(PORT, () => {
+      console.log(`🌍 Now listening on http://localhost:${PORT}`);
+      console.log(`🚀 GraphQL server ready at http://localhost:${PORT}/graphql`);
+    });
+  // });
+};
+
+startApolloServer();
+
+
