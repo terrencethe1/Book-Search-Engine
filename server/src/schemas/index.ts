@@ -1,5 +1,5 @@
 import typeDefs from './typeDefs.js';
-import resolvers from './resolversjs';
+import resolvers from './resolvers.js';
 
 export { typeDefs, resolvers };
 
