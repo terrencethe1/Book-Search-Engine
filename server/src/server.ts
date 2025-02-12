@@ -6,8 +6,7 @@ import path from 'node:path';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 
-import { typeDefs, resolvers } from './schemas/index.js';
-import db from './config/connection.js';
+import {typeDefs, resolvers} from './schemas/index.ts'; 
 import { authMiddleware } from './services/auth.js';
 
 import { fileURLToPath } from 'url';
@@ -29,7 +28,7 @@ const startApolloServer = async () => {
   });
 
   await server.start();
-  await db();
+  // await db.open();
   // server.applyMiddleware({ app });
   app.use('/graphql', expressMiddleware(server, {
     context: authMiddleware as any
