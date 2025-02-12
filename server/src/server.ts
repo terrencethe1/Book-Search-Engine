@@ -46,10 +46,15 @@ const startApolloServer = async () => {
   // }
 
   // db.once('open', () => {
+  db().then(() => {
     app.listen(PORT, () => {
       console.log(`🌍 Now listening on http://localhost:${PORT}`);
       console.log(`🚀 GraphQL server ready at http://localhost:${PORT}/graphql`);
     });
+  }).catch((error) => {
+    console.error('Error on server startup:', error);
+  });
+    
   // });
 };
 
