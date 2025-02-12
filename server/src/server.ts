@@ -6,7 +6,7 @@ import path from 'node:path';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 
-import {typeDefs, resolvers} from './schemas/index.ts'; 
+import {typeDefs, resolvers} from './schemas/index.js'; 
 import { authMiddleware } from './services/auth.js';
 
 import { fileURLToPath } from 'url';
